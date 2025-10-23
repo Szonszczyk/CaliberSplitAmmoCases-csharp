@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>CaliberSplitAmmoCases</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <OutputType>Library</OutputType>
+    <Version>4.0.0</Version>
+    <!-- The two lines below will set the output path for the binaries -->
+    <OutputPath>bin\$(Configuration)\$(ProjectName)\$(AssemblyName)\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="properties\launchSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SPTarkov.Common" Version="4.0.0" />
+    <PackageReference Include="SPTarkov.DI" Version="4.0.0" />
+    <PackageReference Include="SPTarkov.Server.Core" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="echo f | xcopy /s /y /f &quot;C:\Programowanie\SPT 4.0 Mods\CaliberSplitAmmoCases\bin\Debug\CaliberSplitAmmoCases\CaliberSplitAmmoCases.dll&quot; &quot;C:\Games\SPT 4.0\SPT\user\mods\CaliberSplitAmmoCases\CaliberSplitAmmoCases.dll&quot;&#xD;&#xA;echo f | xcopy /s /y /f &quot;C:\Programowanie\SPT 4.0 Mods\CaliberSplitAmmoCases\bin\Debug\CaliberSplitAmmoCases\CaliberSplitAmmoCases.pdb&quot; &quot;C:\Games\SPT 4.0\SPT\user\mods\CaliberSplitAmmoCases\CaliberSplitAmmoCases.pdb&quot;" />
+  </Target>
+</Project>

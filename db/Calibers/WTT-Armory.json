@@ -1,0 +1,12 @@
+{
+    "762x67B": {
+		"name": ".300 Winchester Magnum",
+		"id": "Caliber762x67B",
+		"shortName": ".300 WM"
+	},
+    ".338 Norma": {
+		"name": ".338 Norma",
+		"id": "Caliber338Norma",
+		"shortName": ".338 Norma"
+	}
+}
