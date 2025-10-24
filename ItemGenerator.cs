@@ -48,8 +48,7 @@ namespace CaliberSplitAmmoCases
                         BackgroundColor = IsPluginLoaded() ? config.BackgroundColorColorConverterAPI : config.BackgroundColor,
                         Weight = 0,
                         Width = config.Width,
-                        Height = config.Height,
-                        CanSellOnRagfair = config.FleaMarketBlacklisted
+                        Height = config.Height
                     },
                     Locales = new Dictionary<string, LocaleDetails>
                     {
@@ -118,7 +117,11 @@ namespace CaliberSplitAmmoCases
                     }
                     newItem.OverrideProperties.Grids = grids;
                 }
-                customItemCreator.AddItemToDatabase(newItem, new CustomItemConfig(), customBarterConfig);
+                var customItemConfig = new CustomItemConfig
+                {
+                    FleaBlacklisted = config.FleaMarketBlacklisted
+                };
+                customItemCreator.AddItemToDatabase(newItem, customItemConfig, customBarterConfig);
 
                 // Add case to filters of Item Case and THICC Item Case
                 itemCaseFilter?.Add(newItem.NewId);
