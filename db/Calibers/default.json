@@ -1,132 +1,132 @@
 {
 	"545x39": {
-		"name": "5.45x39mm",
-		"id": "Caliber545x39",
-		"shortName": "5.45x39"
+		"Name": "5.45x39mm",
+		"Id": "Caliber545x39",
+		"ShortName": "5.45x39"
 	},
 	"556x45": {
-		"name": "5.56x45mm NATO",
-		"id": "Caliber556x45NATO",
-		"shortName": "5.56x45"
+		"Name": "5.56x45mm NATO",
+		"Id": "Caliber556x45NATO",
+		"ShortName": "5.56x45"
 	},
 	"68x51": {
-		"name": "6.8x51mm",
-		"id": "Caliber68x51",
-		"shortName": "6.8x51"
+		"Name": "6.8x51mm",
+		"Id": "Caliber68x51",
+		"ShortName": "6.8x51"
 	},
 	"300": {
-		"name": ".300 Blackout",
-		"id": "Caliber762x35",
-		"shortName": ".300"
+		"Name": ".300 Blackout",
+		"Id": "Caliber762x35",
+		"ShortName": ".300"
 	},
 	"762x39": {
-		"name": "7.62x39mm",
-		"id": "Caliber762x39",
-		"shortName": "7.62x39"
+		"Name": "7.62x39mm",
+		"Id": "Caliber762x39",
+		"ShortName": "7.62x39"
 	},
 	"762x51": {
-		"name": "7.62x51mm NATO",
-		"id": "Caliber762x51",
-		"shortName": "7.62x51"
+		"Name": "7.62x51mm NATO",
+		"Id": "Caliber762x51",
+		"ShortName": "7.62x51"
 	},
 	"762x54": {
-		"name": "7.62x54mmR",
-		"id": "Caliber762x54R",
-		"shortName": "7.62x54R"
+		"Name": "7.62x54mmR",
+		"Id": "Caliber762x54R",
+		"ShortName": "7.62x54R"
 	},
 	"338": {
-		"name": ".338 Lapua Magnum",
-		"id": "Caliber86x70",
-		"shortName": ".338"
+		"Name": ".338 Lapua Magnum",
+		"Id": "Caliber86x70",
+		"ShortName": ".338"
 	},
 	"9x39": {
-		"name": "9x39mm",
-		"id": "Caliber9x39",
-		"shortName": "9x39"
+		"Name": "9x39mm",
+		"Id": "Caliber9x39",
+		"ShortName": "9x39"
 	},
 	"366": {
-		"name": ".366 TKM",
-		"id": "Caliber366TKM",
-		"shortName": ".366"
+		"Name": ".366 TKM",
+		"Id": "Caliber366TKM",
+		"ShortName": ".366"
 	},
 	"127x55": {
-		"name": "12.7x55mm STs-130",
-		"id": "Caliber127x55",
-		"shortName": "12.7x55"
+		"Name": "12.7x55mm STs-130",
+		"Id": "Caliber127x55",
+		"ShortName": "12.7x55"
 	},
 	"762x25": {
-		"name": "7.62x25mm Tokarev",
-		"id": "Caliber762x25TT",
-		"shortName": "7.62x25"
+		"Name": "7.62x25mm Tokarev",
+		"Id": "Caliber762x25TT",
+		"ShortName": "7.62x25"
 	},
 	"9x18": {
-		"name": "9x18mm Makarov",
-		"id": "Caliber9x18PM",
-		"shortName": "9x18"
+		"Name": "9x18mm Makarov",
+		"Id": "Caliber9x18PM",
+		"ShortName": "9x18"
 	},
 	"9x19": {
-		"name": "9x19mm Parabellum",
-		"id": "Caliber9x19PARA",
-		"shortName": "9x19"
+		"Name": "9x19mm Parabellum",
+		"Id": "Caliber9x19PARA",
+		"ShortName": "9x19"
 	},
 	"9x21": {
-		"name": "9x21mm Gyurza",
-		"id": "Caliber9x21",
-		"shortName": "9x21"
+		"Name": "9x21mm Gyurza",
+		"Id": "Caliber9x21",
+		"ShortName": "9x21"
 	},
 	"357": {
-		"name": ".357 Magnum",
-		"id": "Caliber9x33R",
-		"shortName": ".357"
+		"Name": ".357 Magnum",
+		"Id": "Caliber9x33R",
+		"ShortName": ".357"
 	},
 	"45ACP": {
-		"name": ".45 ACP",
-		"id": "Caliber1143x23ACP",
-		"shortName": ".45"
+		"Name": ".45 ACP",
+		"Id": "Caliber1143x23ACP",
+		"ShortName": ".45"
 	},
 	"46x30": {
-		"name": "4.6x30mm HK",
-		"id": "Caliber46x30",
-		"shortName": "4.6x30"
+		"Name": "4.6x30mm HK",
+		"Id": "Caliber46x30",
+		"ShortName": "4.6x30"
 	},
 	"57x28": {
-		"name": "5.7x28mm FN",
-		"id": "Caliber57x28",
-		"shortName": "5.7x28"
+		"Name": "5.7x28mm FN",
+		"Id": "Caliber57x28",
+		"ShortName": "5.7x28"
 	},
 	"1270": {
-		"name": "12/70 Shotgun",
-		"id": "Caliber12g",
-		"shortName": "12/70 Shotgun"
+		"Name": "12/70 Shotgun",
+		"Id": "Caliber12g",
+		"ShortName": "12/70 Shotgun"
 	},
 	"2070": {
-		"name": "20/70 Shotgun",
-		"id": "Caliber20g",
-		"shortName": "20/70 Shotgun"
+		"Name": "20/70 Shotgun",
+		"Id": "Caliber20g",
+		"ShortName": "20/70 Shotgun"
 	},
 	"23x75": {
-		"name": "23x75mm Shotgun",
-		"id": "Caliber23x75",
-		"shortName": "23x75 Shotgun"
+		"Name": "23x75mm Shotgun",
+		"Id": "Caliber23x75",
+		"ShortName": "23x75 Shotgun"
 	},
 	"40x46": {
-		"name": "40x46mm Grenade",
-		"id": "Caliber40x46",
-		"shortName": "40x46 Grenade"
+		"Name": "40x46mm Grenade",
+		"Id": "Caliber40x46",
+		"ShortName": "40x46 Grenade"
 	},
 	"50AE": {
-		"name": ".50 Action Express",
-		"id": "Caliber127x33",
-		"shortName": ".50 AE"
+		"Name": ".50 Action Express",
+		"Id": "Caliber127x33",
+		"ShortName": ".50 AE"
 	},
 	"26x75": {
-		"name": "26x75 Flare",
-		"id": "Caliber26x75",
-		"shortName": "Flare"
+		"Name": "26x75 Flare",
+		"Id": "Caliber26x75",
+		"ShortName": "Flare"
 	},
 	"127x99": {
-		"name": ".50 BMG NATO",
-		"id": "Caliber127x99",
-		"shortName": ".50 BMG"
+		"Name": ".50 BMG NATO",
+		"Id": "Caliber127x99",
+		"ShortName": ".50 BMG"
 	}
 }

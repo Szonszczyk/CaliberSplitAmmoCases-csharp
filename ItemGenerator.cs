@@ -18,8 +18,18 @@ namespace CaliberSplitAmmoCases
 
         public void GenerateItems(ConfigData config, ModDatabaseLoader modDatabaseLoader, CustomItemCreator customItemCreator)
         {
-            customBarterConfig = CreateCustomBarterConfig(config, items, logger, GetType().Namespace);
+            customBarterConfig = CreateCustomBarterConfig(config, items, logger, "CaliberSplitAmmoCases");
             var allAmmo = LoadAmmo(config, modDatabaseLoader);
+
+            var itemCaseFilter = items["59fb042886f7746c5005a7b2"]?
+                    .Properties?.Grids?.FirstOrDefault()?
+                    .Properties?.Filters?.FirstOrDefault()?
+                    .Filter;
+            var thiccItemCaseFilter = items["5c0a840b86f7742ffa4f2482"]?
+                    .Properties?.Grids?.FirstOrDefault()?
+                    .Properties?.Filters?.FirstOrDefault()?
+                    .Filter;
+
             foreach (var ammo in allAmmo)
             {
                 var ammoType = ammo.Key;
@@ -109,6 +119,10 @@ namespace CaliberSplitAmmoCases
                     newItem.OverrideProperties.Grids = grids;
                 }
                 customItemCreator.AddItemToDatabase(newItem, new CustomItemConfig(), customBarterConfig);
+
+                // Add case to filters of Item Case and THICC Item Case
+                itemCaseFilter?.Add(newItem.NewId);
+                thiccItemCaseFilter?.Add(newItem.NewId);
             }
             if (SaveIDsDatabase)
             {

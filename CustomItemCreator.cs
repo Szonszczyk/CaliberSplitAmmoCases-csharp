@@ -60,7 +60,7 @@ namespace CaliberSplitAmmoCases
         private void AddItemToInventorySlots(string itemId, CustomItemConfig itemConfig)
         {
             TemplateItem defaultInventory = items["55d7217a4bdc2d86028b456d"];
-            IEnumerable<Slot>? defaultInventorySlots = defaultInventory.Properties.Slots;
+            IEnumerable<Slot>? defaultInventorySlots = defaultInventory?.Properties?.Slots;
             if (defaultInventorySlots != null && defaultInventorySlots.Any())
             {
                 foreach (var slot in defaultInventorySlots)

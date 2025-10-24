@@ -17,9 +17,9 @@ public class CaliberSplitAmmoCases(ISptLogger<CaliberSplitAmmoCases> logger, Mod
     public Task OnLoad()
     {
         ConfigLoader configLoader = new(logger, modHelper, jsonUtil);
+        ModDatabaseLoader modDatabaseLoader = new(logger, modHelper, jsonUtil);
         CustomItemCreator customItemCreator = new(logger, configServer, customItemService, databaseService);
         ItemGenerator itemGenerator = new(logger, databaseService);
-        ModDatabaseLoader modDatabaseLoader = new(modHelper);
 
         var config = configLoader.LoadConfig();
         itemGenerator.GenerateItems(config, modDatabaseLoader, customItemCreator);
