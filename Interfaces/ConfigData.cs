@@ -30,12 +30,12 @@
         // ### 3. Generation settings
         public bool UseOnlyKnownCalibers { get; set; } = false;
         public bool RemoveBadCalibers { get; set; } = true;
-        public List<string> BadCalibers { get; set; } = new()
-        {
+        public List<string> BadCalibers { get; set; } =
+        [
             "Caliber40mmRU",
             "Caliber30x29",
             "Caliber20x1mm"
-        };
+        ];
 
         // ### 4. Cases configuration
         public string BackgroundColor { get; set; } = "red";

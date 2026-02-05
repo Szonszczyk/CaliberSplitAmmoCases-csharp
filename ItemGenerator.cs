@@ -1,4 +1,5 @@
 ﻿using CaliberSplitAmmoCases.Interfaces;
+using CaliberSplitAmmoCases.Loaders;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
 using SPTarkov.Server.Core.Models.Enums;
@@ -10,16 +11,24 @@ using SPTarkov.Server.Core.Services;
 
 namespace CaliberSplitAmmoCases
 {
-    internal class ItemGenerator(ISptLogger<CaliberSplitAmmoCases> logger, DatabaseService databaseService)
+    internal class ItemGenerator(
+        ISptLogger<CaliberSplitAmmoCases> logger,
+        DatabaseService databaseService,
+        ConfigLoader configLoader,
+        ModDatabaseLoader modDatabaseLoader,
+        CustomItemCreator customItemCreator
+    )
     {
         private readonly Dictionary<MongoId, TemplateItem> items = databaseService.GetItems();
         private bool SaveIDsDatabase = false;
         private CustomBarterConfig customBarterConfig = new();
+        private readonly ConfigData modConfig = configLoader.Config;
 
-        public void GenerateItems(ConfigData config, ModDatabaseLoader modDatabaseLoader, CustomItemCreator customItemCreator)
+
+        public void GenerateItems()
         {
-            customBarterConfig = CreateCustomBarterConfig(config, items, logger, "CaliberSplitAmmoCases");
-            var allAmmo = LoadAmmo(config, modDatabaseLoader);
+            customBarterConfig = CreateCustomBarterConfig(modConfig, items);
+            var allAmmo = LoadAmmo(modConfig, modDatabaseLoader);
 
             var itemCaseFilter = items["59fb042886f7746c5005a7b2"]?
                     .Properties?.Grids?.FirstOrDefault()?
@@ -41,14 +50,14 @@ namespace CaliberSplitAmmoCases
                     ParentId = "5795f317245977243854e041",
                     HandbookParentId = "5b5f6fa186f77409407a7eb7",
                     NewId = ResolveMongoId(modDatabaseLoader, $"CASEID{ammoType}"),
-                    FleaPriceRoubles = Math.Floor(config.HandbookPriceRoubles * 1.3),
-                    HandbookPriceRoubles = config.HandbookPriceRoubles,
+                    FleaPriceRoubles = Math.Floor(modConfig.HandbookPriceRoubles * 1.3),
+                    HandbookPriceRoubles = modConfig.HandbookPriceRoubles,
                     OverrideProperties = new TemplateItemProperties
                     {
-                        BackgroundColor = IsPluginLoaded() ? config.BackgroundColorColorConverterAPI : config.BackgroundColor,
+                        BackgroundColor = IsPluginLoaded() ? modConfig.BackgroundColorColorConverterAPI : modConfig.BackgroundColor,
                         Weight = 0,
-                        Width = config.Width,
-                        Height = config.Height
+                        Width = modConfig.Width,
+                        Height = modConfig.Height
                     },
                     Locales = new Dictionary<string, LocaleDetails>
                     {
@@ -62,7 +71,7 @@ namespace CaliberSplitAmmoCases
                         }
                     }
                 };
-                if (config.UseWholeCaseForCaliber_Mode)
+                if (modConfig.UseWholeCaseForCaliber_Mode)
                 {
                     Grid wholeCaseGrid = new()
                     {
@@ -72,8 +81,8 @@ namespace CaliberSplitAmmoCases
                         Prototype = "55d329c24bdc2d892f8b4567",
                         Properties = new()
                         {
-                            CellsH = config.WholeCaseHeight,
-                            CellsV = config.WholeCaseWidth,
+                            CellsH = modConfig.WholeCaseHeight,
+                            CellsV = modConfig.WholeCaseWidth,
                             Filters = [
                                 new GridFilter {
                                     Filter = ammoArray
@@ -101,7 +110,7 @@ namespace CaliberSplitAmmoCases
                             Properties = new()
                             {
                                 CellsH = 1,
-                                CellsV = config.CaseSlotsPerAmmo,
+                                CellsV = modConfig.CaseSlotsPerAmmo,
                                 Filters = [
                                     new GridFilter {
                                         Filter = [ammoId]
@@ -119,7 +128,7 @@ namespace CaliberSplitAmmoCases
                 }
                 var customItemConfig = new CustomItemConfig
                 {
-                    FleaBlacklisted = config.FleaMarketBlacklisted
+                    FleaBlacklisted = modConfig.FleaMarketBlacklisted
                 };
                 customItemCreator.AddItemToDatabase(newItem, customItemConfig, customBarterConfig);
 
@@ -189,7 +198,7 @@ namespace CaliberSplitAmmoCases
                 return false;
             }
         }
-        private static CustomBarterConfig CreateCustomBarterConfig(ConfigData config, Dictionary<MongoId, TemplateItem> items, ISptLogger<CaliberSplitAmmoCases> logger, string namespaceName)
+        private CustomBarterConfig CreateCustomBarterConfig(ConfigData config, Dictionary<MongoId, TemplateItem> items)
         {
             if (config.CasesOnPeacekeeper)
             {
@@ -234,12 +243,12 @@ namespace CaliberSplitAmmoCases
                     return new CustomBarterConfig
                     {
                         TraderId = Traders.PRAPOR,
-                        Price = (int)Math.Floor(config.RoublesPriceMultiplier * config.HandbookPriceRoubles),
-                        Barter = ItemTpl.MONEY_ROUBLES
+                        Price = config.BarterPrice,
+                        Barter = config.BarterType
                     };
                 } else
                 {
-                    logger.LogWithColor($"[{namespaceName}] MongoId for Prapor barter: {config.BarterType} do not exists! Cases are added to Peacekeeper instead!", LogTextColor.Red);
+                    logger.LogWithColor($"[{GetType().Namespace}] MongoId for Prapor barter: {config.BarterType} do not exists! Cases are added to Peacekeeper instead!", LogTextColor.Red);
                 }
             }
             return new CustomBarterConfig

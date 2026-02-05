@@ -5,13 +5,14 @@ using SPTarkov.Server.Core.Models.Utils;
 using SPTarkov.Server.Core.Utils;
 using System.Reflection;
 
-namespace CaliberSplitAmmoCases
+namespace CaliberSplitAmmoCases.Loaders
 {
     public class ModDatabaseLoader
     {
         private readonly string modFolder;
         private readonly JsonUtil _jsonutil;
         private readonly ISptLogger<CaliberSplitAmmoCases> _logger;
+        private readonly ModHelper _modHelper;
 
         public Dictionary<string, CaliberInfo> DbCaliber { get; private set; }
         public Dictionary<string, string> DbItemsIds { get; private set; }
@@ -22,6 +23,7 @@ namespace CaliberSplitAmmoCases
             modFolder = modHelper.GetAbsolutePathToModFolder(Assembly.GetExecutingAssembly());
             _jsonutil = jsonUtil;
             _logger = logger;
+            _modHelper = modHelper;
 
             DbCaliber = LoadDbCaliber(Path.Combine(modFolder, "db", "Calibers"), jsonUtil, logger);
             DbItemsIds = LoadOrCreateJSON(Path.Combine(modFolder, "db", "Ids", "idDatabase.json"), jsonUtil, logger);
@@ -36,7 +38,7 @@ namespace CaliberSplitAmmoCases
             _logger.LogWithColor($"[CaliberSplitAmmoCases] File db/Ids/idDatabase.json has been changed", LogTextColor.Green);
         }
 
-        public static Dictionary<string, CaliberInfo> LoadDbCaliber(string directoryPath, JsonUtil jsonUtil, ISptLogger<CaliberSplitAmmoCases> logger)
+        public Dictionary<string, CaliberInfo> LoadDbCaliber(string directoryPath, JsonUtil jsonUtil, ISptLogger<CaliberSplitAmmoCases> logger)
         {
             var combinedData = new Dictionary<string, CaliberInfo>(StringComparer.OrdinalIgnoreCase);
 
@@ -52,8 +54,8 @@ namespace CaliberSplitAmmoCases
             {
                 try
                 {
-                    string jsonContent = File.ReadAllText(file);
-                    var data = jsonUtil.Deserialize<Dictionary<string, CaliberInfo>>(jsonContent);
+
+                    var data = _modHelper.GetJsonDataFromFile<Dictionary<string, CaliberInfo>>(modFolder, file);
 
                     if (data == null)
                         continue;
