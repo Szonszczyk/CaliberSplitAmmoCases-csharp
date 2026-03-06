@@ -11,7 +11,7 @@ using SPTarkov.Server.Core.Utils;
 
 namespace CaliberSplitAmmoCases;
 
-[Injectable(TypePriority = OnLoadOrder.PostDBModLoader + 73132)]
+[Injectable(TypePriority = OnLoadOrder.PostDBModLoader + 97323)]
 public class CaliberSplitAmmoCases(
     ISptLogger<CaliberSplitAmmoCases> logger,
     ModHelper modHelper,

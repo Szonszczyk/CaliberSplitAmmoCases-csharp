@@ -128,5 +128,10 @@
 		"Name": ".50 BMG NATO",
 		"Id": "Caliber127x99",
 		"ShortName": ".50 BMG"
+	},
+	"20x1": {
+		"Name": "20x1mm disk",
+		"Id": "Caliber20x1mm",
+		"ShortName": "Disk"
 	}
 }

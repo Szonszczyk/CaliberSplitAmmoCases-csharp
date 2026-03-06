@@ -51,6 +51,11 @@
     // Barter price on Prapor
     "BarterPrice": 1,
 
+    // Instead of any of above mentioned vanilla trader, use Amonya trader
+    // https://forge.sp-tarkov.com/mod/2419/amonya-ammo-loving-trader-quester
+    // This will overwrite what trader is selling cases, not price of cases
+    "UseAmonyaTrader": false,
+
     // ### 3. Generation settings
 
     // Only use known calibers from db/Calibers file
@@ -61,10 +66,10 @@
     // Remove known bad calibers from cases generations
     "RemoveBadCalibers": true, // true/false - default: true
     "BadCalibers": [
-        "Caliber40mmRU",
-        "Caliber30x29",
-        "Caliber20x1mm"
+        "Caliber40mmRU"
     ],
+    // Don't create cases for calibers with lower number of bullets in it than this number
+    "MinimumBulletsInCaliber": 2, // number integer - default: 2
 
     // ### 4. Cases configuration
 

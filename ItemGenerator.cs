@@ -23,6 +23,7 @@ namespace CaliberSplitAmmoCases
         private bool SaveIDsDatabase = false;
         private CustomBarterConfig customBarterConfig = new();
         private readonly ConfigData modConfig = configLoader.Config;
+        private readonly Dictionary<MongoId, Trader> traders = databaseService.GetTraders();
 
 
         public void GenerateItems()
@@ -39,10 +40,9 @@ namespace CaliberSplitAmmoCases
                     .Properties?.Filters?.FirstOrDefault()?
                     .Filter;
 
-            foreach (var ammo in allAmmo)
+            foreach (var (ammoType, ammoArray) in allAmmo)
             {
-                var ammoType = ammo.Key;
-                var ammoArray = ammo.Value;
+                if (ammoArray.Count < modConfig.MinimumBulletsInCaliber) continue;
                 var knownAmmo = modDatabaseLoader.DbCaliberById.TryGetValue(ammoType, out CaliberInfo? value) ? value : new CaliberInfo { Name = ammoType, ShortName = ammoType };
                 var newItem = new NewItemFromCloneDetails
                 {
@@ -200,11 +200,16 @@ namespace CaliberSplitAmmoCases
         }
         private CustomBarterConfig CreateCustomBarterConfig(ConfigData config, Dictionary<MongoId, TemplateItem> items)
         {
+            if (modConfig.UseAmonyaTrader && !traders.TryGetValue("ee840a5ba014e9c5478d5ccd", out _))
+            {
+                logger.LogWithColor($"[{GetType().Namespace}] Config option \"UseAmonyaTrader\" is enabled, but Amonya mod is not installed!", LogTextColor.Red);
+                modConfig.UseAmonyaTrader = false;
+            }
             if (config.CasesOnPeacekeeper)
             {
                 return new CustomBarterConfig
                 {
-                    TraderId = Traders.PEACEKEEPER,
+                    TraderId = modConfig.UseAmonyaTrader ? "ee840a5ba014e9c5478d5ccd" : Traders.PEACEKEEPER,
                     Price = config.USDPrice,
                     Barter = ItemTpl.MONEY_DOLLARS
                 };
@@ -213,7 +218,7 @@ namespace CaliberSplitAmmoCases
             {
                 return new CustomBarterConfig
                 {
-                    TraderId = Traders.REF,
+                    TraderId = modConfig.UseAmonyaTrader ? "ee840a5ba014e9c5478d5ccd" : Traders.REF,
                     Price = config.GpCoinPrice,
                     Barter = ItemTpl.MONEY_GP_COIN
                 };
@@ -222,7 +227,7 @@ namespace CaliberSplitAmmoCases
             {
                 return new CustomBarterConfig
                 {
-                    TraderId = Traders.SKIER,
+                    TraderId = modConfig.UseAmonyaTrader ? "ee840a5ba014e9c5478d5ccd" : Traders.SKIER,
                     Price = config.EuroPrice,
                     Barter = ItemTpl.MONEY_EUROS
                 };
@@ -231,7 +236,7 @@ namespace CaliberSplitAmmoCases
             {
                 return new CustomBarterConfig
                 {
-                    TraderId = Traders.JAEGER,
+                    TraderId = modConfig.UseAmonyaTrader ? "ee840a5ba014e9c5478d5ccd" : Traders.JAEGER,
                     Price = (int)Math.Floor(config.RoublesPriceMultiplier * config.HandbookPriceRoubles),
                     Barter = ItemTpl.MONEY_ROUBLES
                 };
@@ -242,7 +247,7 @@ namespace CaliberSplitAmmoCases
                 {
                     return new CustomBarterConfig
                     {
-                        TraderId = Traders.PRAPOR,
+                        TraderId = modConfig.UseAmonyaTrader ? "ee840a5ba014e9c5478d5ccd" : Traders.PRAPOR,
                         Price = config.BarterPrice,
                         Barter = config.BarterType
                     };
@@ -253,10 +258,10 @@ namespace CaliberSplitAmmoCases
             }
             return new CustomBarterConfig
             {
-                TraderId = "PEACEKEEPER",
+                TraderId = modConfig.UseAmonyaTrader ? "ee840a5ba014e9c5478d5ccd" : Traders.PEACEKEEPER,
                 LoyalLevel = 1,
                 Price = config.USDPrice,
-                Barter = "DOLLARS"
+                Barter = ItemTpl.MONEY_DOLLARS
             };
         }
     }

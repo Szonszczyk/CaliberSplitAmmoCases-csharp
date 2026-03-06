@@ -3,5 +3,10 @@
 		"Name": "9.3x64mm",
 		"Id": "Caliber93x64",
 		"ShortName": "9.3x64"
+	},
+	"308ME": {
+		"Name": ".308 Marlin Express",
+		"Id": "Caliber784x49",
+		"ShortName": ".308 Marlin"
 	}
 }

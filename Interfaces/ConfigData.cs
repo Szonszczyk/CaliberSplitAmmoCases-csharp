@@ -27,15 +27,16 @@
         public string BarterType { get; set; } = "5aafbde786f774389d0cbc0f";
         public int BarterPrice { get; set; } = 1;
 
+        public bool UseAmonyaTrader { get; set; } = false;
+
         // ### 3. Generation settings
         public bool UseOnlyKnownCalibers { get; set; } = false;
         public bool RemoveBadCalibers { get; set; } = true;
         public List<string> BadCalibers { get; set; } =
         [
-            "Caliber40mmRU",
-            "Caliber30x29",
-            "Caliber20x1mm"
+            "Caliber40mmRU"
         ];
+        public int MinimumBulletsInCaliber { get; set; } = 2;
 
         // ### 4. Cases configuration
         public string BackgroundColor { get; set; } = "red";

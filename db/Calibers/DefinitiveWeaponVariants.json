@@ -1,7 +1,13 @@
 {
-  "127x108": {
+	"127x108": {
 		"Name": "12.7x108mm",
 		"Id": "Caliber127x108",
 		"ShortName": "12.7x108"
+	},
+	"30x29": {
+		"Name": "30x29mm Grenade",
+		"Id": "Caliber30x29",
+		"ShortName": "30x29 Grenade"
 	}
+
 }
